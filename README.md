@@ -16,8 +16,13 @@ sudo reboot
 
 Configuration:
 ```
-miner [worker] bminer
+globalminer bminer
+#or 
+#miner [worker] bminer
+stratumproxy miner
 bminer=proxywallet farm@test.com
+#or
+#bminer=proxywallet <wallet-ip>:<port>
 bminer=proxypool1 us-east.stratum.grinmint.com:3416
 bminer=poolpass1 farmpw
 ```
