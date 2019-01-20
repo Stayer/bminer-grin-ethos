@@ -8,7 +8,7 @@ bminer version: v12.2.0-937f19b-ethos
 ### Installation
 ```
 # From rig:
-git clone https://github.com/amnesium/bminer-ethos.git
+git clone https://github.com/amnesium/bminer-grin-ethos.git
 cd bminer-ethos
 ./install
 sudo reboot
