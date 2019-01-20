@@ -1,0 +1,1 @@
+bminer v12.2.0-937f19b-ethos

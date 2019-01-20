@@ -1,0 +1,2 @@
+#!/bin/bash
+LD_LIBRARY_PATH=/opt/miners/bminer:$LD_LIBRARY_PATH  ./bminer.bin $@
