@@ -1,4 +1,4 @@
-## grin-miner-ethos
+## bminer grin only for ethos
 bminer ethOS Mining OS integration (ethosdistro.com)
 
 Works with ethos 1.3.3 (latest), other versions are not tested.
@@ -9,7 +9,7 @@ bminer version: v12.2.0-937f19b-ethos
 ```
 # From rig:
 git clone https://github.com/amnesium/bminer-grin-ethos.git
-cd bminer-ethos
+cd bminer-grin-ethos
 ./install
 sudo reboot
 ```
