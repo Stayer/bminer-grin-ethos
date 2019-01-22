@@ -683,7 +683,6 @@ function start_miner()
         ********************************/
         if (preg_match("/bminer/",$miner)){ 
                 $devices = implode(",", select_gpus());
-		$grinWorker = trim(`/opt/ethos/sbin/ethos-readconf worker`);
                 if(trim(`/opt/ethos/sbin/ethos-readconf selectedgpus`) != "") {
                         $mine_with = "-devices $devices";
                 }
@@ -693,10 +692,10 @@ function start_miner()
                         $maxtemp = "85";
                 }
 
-                $pools=" -uri cuckaroo29://$proxywallet$grinWorker:$poolpass1@$proxypool1 ";
+                $pools=" -uri cuckaroo29://$proxywallet:$poolpass1@$proxypool1 ";
 
                 if($proxypool2 != "") {
-                        $pools .= " -uri cuckaroo29://$proxywallet$grinWorker:$poolpass1@$proxypool1, cuckaroo29://$proxywallet$worker:$poolpass2@$proxypool2 ";
+                        $pools .= " -uri cuckaroo29://$proxywallet:$poolpass1@$proxypool1, cuckaroo29://$proxywallet:$poolpass2@$proxypool2 ";
                 }
         }
 
