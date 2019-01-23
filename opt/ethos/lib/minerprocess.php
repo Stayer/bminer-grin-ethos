@@ -681,6 +681,12 @@ function start_miner()
         /*******************************
         *  bminer
         ********************************/
+	if (preg_match("/ssl=on/",$flags)) {
+        	$algouri = 'cuckaroo29+ssl';
+	} else {
+        	$algouri = 'cuckaroo29';
+	}
+
         if (preg_match("/bminer/",$miner)){ 
                 $devices = implode(",", select_gpus());
 		$grinWorker = trim(`/opt/ethos/sbin/ethos-readconf worker`);
@@ -693,10 +699,24 @@ function start_miner()
                         $maxtemp = "85";
                 }
 
-                $pools=" -uri cuckaroo29://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1 ";
-
-                if($proxypool2 != "") {
-                        $pools .= " -uri cuckaroo29://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1,cuckaroo29://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
+		if (preg_match("/grinmint/",$proxypool1)) {
+		$pools=" -uri $algouri://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1 ";
+			if ($proxypool2 != "") {
+				if (preg_match("/grinmint/",$proxypool2)) {
+					$pools = " -uri $algouri://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1,$algouri://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
+				} else {
+					$pools = " -uri $algouri://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1,$algouri://$proxywallet.$worker:$poolpass2@$proxypool2 ";
+				}
+			}
+		} else {
+			$pools=" -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1 ";
+			if($proxypool2 != "") {
+				if(preg_match("/grinmint/",$proxypool2)) {
+					$pools = " -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1,$algouri://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
+				} else {
+					$pools = " -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1,$algouri://$proxywallet.$worker:$poolpass2@$proxypool2 ";
+				}
+			}
                 }
         }
 
