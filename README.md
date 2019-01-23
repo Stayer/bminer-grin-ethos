@@ -17,13 +17,20 @@ sudo reboot
 Configuration:
 ```
 globalminer bminer
-#or 
+## or 
 #miner [worker] bminer
+
 stratumproxy miner
-bminer=proxywallet farm@test.com
-#or
+bminer=proxywallet farm+randomstring@test.com
+## or
 #bminer=proxywallet <wallet-ip>:<port>
-bminer=proxypool1 us-east.stratum.grinmint.com:3416
-bminer=poolpass1 farmpw
+
+bminer=proxypool1 us-east.stratum.grinmint.com:4416
+bminer=poolpass1 securepass1
+bminer=proxypool1 eu-west-stratum.grinmint.com:4416
+bminer=poolpass2 securepass2
+# Use this flag to enable SSL. If you enable SSL both of your pool have to support SSL.
+bminer=flags ssl=on
+
 ```
 
