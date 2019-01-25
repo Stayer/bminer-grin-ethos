@@ -1,1 +1,1 @@
-bminer v12.2.0-937f19b-ethos
+bminer v13.2.0-2caa8fc-ethos
