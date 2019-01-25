@@ -344,6 +344,7 @@ function start_miner()
 {
 	$miner = trim(`/opt/ethos/sbin/ethos-readconf miner`);
 	$mine_with = "";
+	$rig_ip = trim(`/opt/ethos/sbin/ethos-readdata ip`);
 	
 	check_miner();
 	$status = check_status();
