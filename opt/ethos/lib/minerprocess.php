@@ -344,8 +344,7 @@ function start_miner()
 {
 	$miner = trim(`/opt/ethos/sbin/ethos-readconf miner`);
 	$mine_with = "";
-	$rig_ip = trim(`/opt/ethos/sbin/ethos-readdata ip`);
-
+	
 	check_miner();
 	$status = check_status();
 
@@ -662,21 +661,26 @@ function start_miner()
         /*******************************
         *  Grin miner
         ********************************/
-	if (preg_match("/grin-miner/",$miner)){	
-		$maxtemp = trim(shell_exec("/opt/ethos/sbin/ethos-readconf maxtemp"));
-		if ($maxtemp == "") {
-			$maxtemp = "85";
-		}
-		$config_string = file_get_contents("/home/ethos/grin-miner.stub.conf");
+        if (preg_match("/grin-miner/",$miner)){
+                $config_string = file_get_contents("/home/ethos/grin-miner.stub.conf");
+                if (preg_match("/ssl=on/",$flags)) {
+                        $config_string = str_replace("SSLSTATE","true",$config_string);
+                } else {
+                        $config_string = str_replace("SSLSTATE","false",$config_string);
+                }
 
-		$config_string = str_replace("WORKER",trim(`/opt/ethos/sbin/ethos-readconf worker`),$config_string);
-		$config_string = str_replace("POOL1",$proxypool1,$config_string);
-#		$config_string = str_replace("POOL2",$proxypool2,$config_string);
-		$config_string = str_replace("LOGIN",$proxywallet,$config_string);
-		$config_string = str_replace("PASSWORD1",$poolpass1,$config_string);
-#		$config_string = str_replace("PASSWORD2",$poolpass2,$config_string);
-		file_put_contents("/home/ethos/.grin/grin-miner.toml",$config_string);
-	}
+                $maxtemp = trim(shell_exec("/opt/ethos/sbin/ethos-readconf maxtemp"));
+                if ($maxtemp == "") {
+                        $maxtemp = "85";
+                }
+                $config_string = str_replace("WORKER",trim(`/opt/ethos/sbin/ethos-readconf worker`),$config_string);
+                $config_string = str_replace("POOL1",$proxypool1,$config_string);
+#               $config_string = str_replace("POOL2",$proxypool2,$config_string);
+                $config_string = str_replace("LOGIN",$proxywallet,$config_string);
+                $config_string = str_replace("PASSWORD1",$poolpass1,$config_string);
+#               $config_string = str_replace("PASSWORD2",$poolpass2,$config_string);
+                file_put_contents("/home/ethos/.grin/grin-miner.toml",$config_string);
+        }
 
         /*******************************
         *  bminer
@@ -1168,8 +1172,9 @@ function start_miner()
 	$miner_path['teamredminer'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.teamredminer -l -L -dmS teamredminer /opt/miners/teamredminer/teamredminer";
 	$miner_path['ewbf-equihash'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.ewbf-equihash -l -L -dmS ewbf-equihash /opt/miners/ewbf-equihash/ewbf-equihash";
 	$miner_path['lolminer'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.lolminer -l -L -dmS lolminer /opt/miners/lolminer/lolMiner";
-        $miner_path['grin-miner'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.grin-miner -l -L -dmS grin-miner /opt/miners/grin-miner/grin-miner";
-	$miner_path['bminer'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.bminer -l -L -dmS bminer /opt/miners/bminer/bminer";
+	$miner_path['grin-miner'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.grin-miner -l -L -dmS grin-miner /opt/miners/grin-miner/grin-miner";
+	$miner_path['bminer'] = "/usr/bin/screen -c /opt/ethos/etc/screenrc.bminer -l -L -dmS bminer /opt/miners/bminer/bminer";	
+			
 	$start_miners = select_gpus();
 
 	foreach($start_miners as $start_miner) {
@@ -1204,7 +1209,6 @@ function start_miner()
 		$miner_params['grin-miner'] = "";
                 $miner_params['bminer'] = $pools;
 
-
 		$miner_suffix['avermore'] = " " . $mine_with . " " . $extraflags;
 		$miner_suffix['dstm-zcash'] = " " . $mine_with . " " . $extraflags;
 		$miner_suffix['ccminer'] = " " . $mine_with . " " . $extraflags;
@@ -1229,7 +1233,7 @@ function start_miner()
 		$miner_suffix['lolminer'] = "";
 		$miner_suffix['grin-miner'] = "";
                 $miner_suffix['bminer'] = " " . $mine_with. " " . "-api $rig_ip:1880";
-
+		
 		$command = "su - ethos -c \"" . escapeshellcmd($miner_path[$miner] . " " . $miner_params[$miner]) . " $miner_suffix[$miner]\"";
 		$command = str_replace('\#',"#",$command);
 		$command = str_replace('\&',"&",$command);
