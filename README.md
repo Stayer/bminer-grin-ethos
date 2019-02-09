@@ -3,7 +3,7 @@ bminer ethOS Mining OS integration (ethosdistro.com)
 
 Works with ethos 1.3.3 (latest), other versions are not tested.
 
-bminer version: v13.2.0-2caa8fc-ethos
+bminer version: v14.3.0-cbb8683-ethos
 
 ### Installation
 ```
