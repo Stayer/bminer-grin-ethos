@@ -1,4 +1,4 @@
-## bminer grin only for ethos
+## bminer (grin only) for ethos
 bminer ethOS Mining OS integration (ethosdistro.com)
 
 Works with ethos 1.3.3 (latest), other versions are not tested.
@@ -33,4 +33,5 @@ bminer=poolpass2 securepass2
 bminer=flags ssl=on
 
 ```
+
 
