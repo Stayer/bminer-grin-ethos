@@ -714,7 +714,7 @@ function start_miner()
 				}
 			}
 		} else {
-			$pools=" -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1 ";
+			$pools=" -uri $algouri://$proxywallet$worker:$poolpass1@$proxypool1 ";
 			if($proxypool2 != "") {
 				if(preg_match("/grinmint/",$proxypool2)) {
 					$pools = " -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1,$algouri://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
