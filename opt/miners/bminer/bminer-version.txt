@@ -1,2 +1,2 @@
-bminer v14.3.0-cbb8683-ethos
+bminer-v15.0.0-e143cb4-ethos
 

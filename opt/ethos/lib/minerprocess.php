@@ -710,7 +710,7 @@ function start_miner()
 				if (preg_match("/grinmint/",$proxypool2)) {
 					$pools = " -uri $algouri://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1,$algouri://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
 				} else {
-					$pools = " -uri $algouri://$proxywallet%2F$grinWorker:$poolpass1@$proxypool1,$algouri://$proxywallet.$worker:$poolpass2@$proxypool2 ";
+					$pools = " -uri $algouri://$proxywallet$worker:$poolpass1@$proxypool1,$algouri://$proxywallet$worker:$poolpass2@$proxypool2 ";
 				}
 			}
 		} else {
@@ -719,7 +719,7 @@ function start_miner()
 				if(preg_match("/grinmint/",$proxypool2)) {
 					$pools = " -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1,$algouri://$proxywallet%2F$grinWorker:$poolpass2@$proxypool2 ";
 				} else {
-					$pools = " -uri $algouri://$proxywallet.$worker:$poolpass1@$proxypool1,$algouri://$proxywallet.$worker:$poolpass2@$proxypool2 ";
+					$pools = " -uri $algouri://$proxywallet$worker:$poolpass1@$proxypool1,$algouri://$proxywallet$worker:$poolpass2@$proxypool2 ";
 				}
 			}
                 }
