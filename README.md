@@ -8,7 +8,7 @@ bminer version: v15.0.0-e143cb4--ethos
 ### Installation
 ```
 # From rig:
-git clone https://github.com/amnesium/bminer-grin-ethos.git
+git clone https://github.com/Stayer/bminer-grin-ethos.git
 cd bminer-grin-ethos
 ./install
 sudo reboot
